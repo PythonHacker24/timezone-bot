@@ -8,9 +8,44 @@ const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
 });
 
+const TEAM = [
+  { emoji: "🇮🇳", name: "Aditya Patil", location: "India", tz: "Asia/Kolkata" },
+  { emoji: "🇺🇸", name: "Julia", location: "Miami", tz: "America/New_York" },
+  { emoji: "🇺🇸", name: "Sam Kaplan", location: "San Francisco", tz: "America/Los_Angeles" },
+  { emoji: "🇵🇭", name: "Karylle", location: "Philippines", tz: "Asia/Manila" },
+  { emoji: "🇺🇸", name: "Andrew", location: "New York", tz: "America/New_York" },
+];
+
+function currentTime(tz) {
+  return new Intl.DateTimeFormat("en-US", {
+    timeZone: tz,
+    weekday: "short",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  }).format(new Date());
+}
+
 app.command("/teamtime", async ({ ack, respond }) => {
   await ack();
-  await respond("Timezone bot is alive 🚀");
+
+  const lines = TEAM.map(
+    (m) => `${m.emoji}  *${m.name}* — ${currentTime(m.tz)}  _(${m.location})_`
+  );
+
+  await respond({
+    response_type: "ephemeral",
+    blocks: [
+      {
+        type: "header",
+        text: { type: "plain_text", text: "🌍 Team Timezones", emoji: true },
+      },
+      {
+        type: "section",
+        text: { type: "mrkdwn", text: lines.join("\n") },
+      },
+    ],
+  });
 });
 
 const PORT = Number(process.env.PORT) || 3000;
