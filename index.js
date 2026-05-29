@@ -12,7 +12,6 @@ const TEAM = [
   { emoji: "🇮🇳", name: "Aditya Patil", location: "India", tz: "Asia/Kolkata" },
   { emoji: "🇺🇸", name: "Julia", location: "Miami", tz: "America/New_York" },
   { emoji: "🇺🇸", name: "Sam Kaplan", location: "San Francisco", tz: "America/Los_Angeles" },
-  { emoji: "🇵🇭", name: "Karylle", location: "Philippines", tz: "Asia/Manila" },
   { emoji: "🇺🇸", name: "Andrew", location: "New York", tz: "America/New_York" },
 ];
 
